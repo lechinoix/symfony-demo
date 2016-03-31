@@ -19,8 +19,8 @@ set :log_level, :info
 
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, '/var/www/myapp'
-
-set :permission_method, true
+# 
+# set :permission_method, true
 
 # Default value for :scm is :git
 # set :scm, :git
