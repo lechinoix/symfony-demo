@@ -64,7 +64,7 @@ task :testingsomething do
   end
 end
 
-after "finishing", "setpermissions"
+after :finishing, :setpermissions
 after "setpermissions", "restartfpm"
 after "restartfpm", "testingsomething"
 
