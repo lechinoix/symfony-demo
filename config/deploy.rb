@@ -57,7 +57,7 @@ namespace :deploy do
     end
   end
 
-  after :finishing do
+  after :finishing, :lastModif do
     task :setpermissions do
       sh 'sudo chmod -R 777 /var/www/myapp'
     end
