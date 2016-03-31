@@ -7,11 +7,10 @@ imports:
 #    serializer:
 #        cache: serializer.mapping.cache.apc
 
-#doctrine:
-#    orm:
-#        metadata_cache_driver: apc
-#        result_cache_driver: apc
-#        query_cache_driver: apc
+doctrine:
+    dbal:
+        # temp workaround for https://github.com/doctrine/dbal/issues/1106: define DB path here
+        path: "%kernel.root_dir%/data/blog.sqlite"
 
 monolog:
     handlers:
