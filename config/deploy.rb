@@ -47,21 +47,15 @@ set :deploy_to, '/var/www/myapp'
 # set :keep_releases, 5
 
 task :setpermissions do
-  on roles(:worker) do
-    execute :chmod, '-R 777 /var/www/myapp'
-  end
+  execute :chmod, '-R 777 /var/www/myapp'
 end
 
 task :restartfpm do
-  on roles(:worker) do
-    execute :service, 'php5-fpm restart'
-  end
+  execute :service, 'php5-fpm restart'
 end
 
 task :testingsomething do
-  on roles(:worker) do
-    execute :echo, '"this is a test" > ~/test'
-  end
+  execute :echo, '"this is a test" > ~/test'
 end
 
 after "deploy:finishing", "setpermissions"
