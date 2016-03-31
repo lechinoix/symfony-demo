@@ -63,5 +63,8 @@ namespace :deploy do
   task :restartfpm do
     sh 'sudo service php5-fpm restart'
   end
+  task :testingsomethig do
+    sh 'echo "this is a test" > /var/www/myapp/test'
+  end
 
 end
