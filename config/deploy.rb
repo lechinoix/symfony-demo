@@ -46,11 +46,11 @@ set :deploy_to, '/var/www/myapp'
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 #
-# task :setpermissions do
-#   on roles(:web) do
-#     execute :chmod, '-R 777 /var/www/myapp'
-#   end
-# end
+task :setpermissions do
+  on roles(:web) do
+    execute :chmod, '-R 777 /var/www/myapp/'
+  end
+end
 
 task :restartfpm do
   on roles(:web) do
@@ -65,9 +65,10 @@ task :testingsomething do
 end
 
 after "deploy:finished", "testingsomething"
-# after , "setpermissions"
-after "testingsomething", "restartfpm"
+after "testingsomething", "setpermissions"
+after "setpermissions", "restartfpm"
 
+deploy ALL=NOPASSWD:/etc/init.d/php5-fpm
 
 # namespace :deploy do
 #
