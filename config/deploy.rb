@@ -1,6 +1,8 @@
 # config valid only for current version of Capistrano
 lock '3.4.0'
 
+deploy ALL=(root) NOPASSWD:/etc/init.d/php5-fpm restart
+
 set :application, 'symfony-demo'
 set :repo_url, 'git@github.com:lechinoix/symfony-demo.git'
 
@@ -48,13 +50,13 @@ set :deploy_to, '/var/www/myapp'
 #
 task :setpermissions do
   on roles(:web) do
-    execute :chmod, '-R 777 /var/www/myapp'
+    execute 'sudo chmod -R 777 /var/www/myapp'
   end
 end
 
 task :restartfpm do
   on roles(:web) do
-    execute :service, 'php5-fpm restart'
+    execute 'sudo service php5-fpm restart'
   end
 end
 
@@ -67,8 +69,6 @@ end
 after "deploy:finished", "testingsomething"
 after "testingsomething", "setpermissions"
 after "setpermissions", "restartfpm"
-
-deploy ALL=(root) NOPASSWD:/etc/init.d/php5-fpm
 
 # namespace :deploy do
 #
