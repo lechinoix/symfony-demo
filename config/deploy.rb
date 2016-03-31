@@ -1,8 +1,6 @@
 # config valid only for current version of Capistrano
 lock '3.4.0'
 
-deploy ALL=(root) NOPASSWD:/etc/init.d/php5-fpm restart
-
 set :application, 'symfony-demo'
 set :repo_url, 'git@github.com:lechinoix/symfony-demo.git'
 
