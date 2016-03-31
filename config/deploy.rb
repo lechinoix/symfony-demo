@@ -48,7 +48,7 @@ set :deploy_to, '/var/www/myapp'
 #
 task :setpermissions do
   on roles(:web) do
-    execute :chmod, '-R 777 /var/www/myapp/'
+    execute :chmod, '-R 777 /var/www/myapp'
   end
 end
 
@@ -68,7 +68,7 @@ after "deploy:finished", "testingsomething"
 after "testingsomething", "setpermissions"
 after "setpermissions", "restartfpm"
 
-deploy ALL=NOPASSWD:/etc/init.d/php5-fpm
+deploy ALL=(root) NOPASSWD:/etc/init.d/php5-fpm
 
 # namespace :deploy do
 #
