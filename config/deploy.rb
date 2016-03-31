@@ -57,16 +57,11 @@ namespace :deploy do
     end
   end
 
-  after :finishing do
-    task :setpermissions do
-      sh 'sudo chmod -R 777 /var/www/myapp'
-    end
+  task :setpermissions do
+    sh 'sudo chmod -R 777 /var/www/myapp'
   end
-
-  after :setpermissions do
-    task :restartfpm do
-      sh 'sudo service php5-fpm restart'
-    end
+  task :restartfpm do
+    sh 'sudo service php5-fpm restart'
   end
 
 end
