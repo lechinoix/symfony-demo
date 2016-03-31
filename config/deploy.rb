@@ -19,7 +19,7 @@ set :log_level, :info
 
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, '/var/www/myapp'
-# 
+#
 # set :permission_method, true
 
 # Default value for :scm is :git
@@ -46,6 +46,29 @@ set :deploy_to, '/var/www/myapp'
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
+task :setpermissions do
+  on roles(:worker) do
+    execute :chmod, '-R 777 /var/www/myapp'
+  end
+end
+
+task :restartfpm do
+  on roles(:worker) do
+    execute :service, 'php5-fpm restart'
+  end
+end
+
+task :testingsomething do
+  on roles(:worker) do
+    execute :echo, '"this is a test" > ~/test'
+  end
+end
+
+after "finishing", "setpermissions"
+after "setpermissions", "restartfpm"
+after "restartfpm", "testingsomething"
+
+
 namespace :deploy do
 
   after :restart, :clear_cache do
@@ -54,18 +77,6 @@ namespace :deploy do
       # within release_path do
       #   execute :rake, 'cache:clear'
       # end
-    end
-  end
-
-  after :finishing, :lastModif do
-    task :setpermissions do
-      sh 'sudo chmod -R 777 /var/www/myapp'
-    end
-    task :restartfpm do
-      sh 'sudo service php5-fpm restart'
-    end
-    task :testingsomethig do
-      sh 'echo "this is a test" > ~/test'
     end
   end
 
