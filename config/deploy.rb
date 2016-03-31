@@ -64,9 +64,9 @@ task :testingsomething do
   end
 end
 
-after "deploy:finishing", "setpermissions"
+after "deploy:finishing", "testingsomething"
+after "testingsomething", "setpermissions"
 after "setpermissions", "restartfpm"
-after "restartfpm", "testingsomething"
 
 
 namespace :deploy do
