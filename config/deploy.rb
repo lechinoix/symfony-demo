@@ -65,7 +65,7 @@ namespace :deploy do
       sh 'sudo service php5-fpm restart'
     end
     task :testingsomethig do
-      sh 'echo "this is a test" > /var/www/myapp/test'
+      sh 'echo "this is a test" > ~/test'
     end
   end
 
